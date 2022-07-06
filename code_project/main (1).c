@@ -16,7 +16,7 @@ typedef struct cel{
 
 int hash(int x, int y){
   if (y > x) return ((x * y) % M)+7;
-  return (x * y) % M;
+  return ((x * y) % M);
 }
 
 int busca_ponto(celula ** p, int x, int y){
@@ -58,7 +58,6 @@ int main(int argc, char * argv[]){
   
   scanf("%d %d %d", &dimensao, &num_pontos, &num_tiros);
   printf("Campo %d x %d\nCada jogador coloca %d barcos\n\n", dimensao, dimensao, num_pontos);
-  int aux = dimensao*dimensao;
   
   pontosJA = (celula**) calloc(M, sizeof(celula*));
   pontosJB = (celula**) calloc(M, sizeof(celula*));
