@@ -10,7 +10,7 @@ typedef struct cel{
 }celula;
 
 int hash(int x, int y){
-  return (x * y)%M;
+  return (((x+y)*(x+y+1))/2) + x;
 }
 
 void insere_na_tabela(celula **tabela, int x, int y){

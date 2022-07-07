@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define M 999983 
+//#define M 999983 
 
 //PROCURE A PALAVRA "TODO" (de TO DO) PARA VER O QUE PRECISA MUDAR
 //NAO ALTERE OS PONTOS SORTEADOS PARA OS BARCOS E TIROS
@@ -15,8 +15,9 @@ typedef struct cel{
 }celula;
 
 int hash(int x, int y){
-  if (y > x) return ((x * y) % M)+7;
-  return ((x * y) % M);
+  //if (y > x) return ((x * y) % M)+7;
+  //return ((x * y) % M);
+  return (((x+y)*(x+y+1))/2) + x;
 }
 
 int busca_ponto(celula ** p, int x, int y){
