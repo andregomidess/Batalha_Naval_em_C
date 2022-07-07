@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 
-#define M 466547
+#define M 999983 
 
 typedef struct cel{
   int x;
@@ -10,7 +11,7 @@ typedef struct cel{
 }celula;
 
 int hash(int x, int y){
-  return (((x+y)*(x+y+1))/2) + x;
+  return ((x*y)+(x+y))%M;
 }
 
 void insere_na_tabela(celula **tabela, int x, int y){

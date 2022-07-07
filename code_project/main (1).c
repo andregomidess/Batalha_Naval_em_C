@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-//#define M 999983 
+#include <time.h> //clock(), CLOCKS_PER_SEC e clock_t
+#define M 999983  
 
 //PROCURE A PALAVRA "TODO" (de TO DO) PARA VER O QUE PRECISA MUDAR
 //NAO ALTERE OS PONTOS SORTEADOS PARA OS BARCOS E TIROS
@@ -15,9 +15,10 @@ typedef struct cel{
 }celula;
 
 int hash(int x, int y){
-  //if (y > x) return ((x * y) % M)+7;
-  //return ((x * y) % M);
-  return (((x+y)*(x+y+1))/2) + x;
+  if (x==0 && y==0) return 0;
+  if (x>y) return ((y%x)+(y%M)%19013)%M;
+  else return ((x%y))%M;
+  
 }
 
 int busca_ponto(celula ** p, int x, int y){
@@ -46,7 +47,22 @@ celula** adiciona_ponto(celula **tabela, int x, int y){
   return tabela;
 }
 
+void libera_oceano(celula ** oceano){
+  for (int i=0; i < M; i++){
+    celula* p = oceano[i];
+    while(p != NULL){
+      celula* aux = p;
+      p = p->prox;
+      free(aux);
+    }
+    free(p);
+  }
+
+}
+
 int main(int argc, char * argv[]){
+  //clock_t t;
+ // t = clock();
   int dimensao;
   int num_pontos;
   int num_tiros;
@@ -126,6 +142,8 @@ int main(int argc, char * argv[]){
   
   printf("...\n\nResultado: Jogador A acertou %d e Jogador B %d\n", acertosJA, acertosJB);
   
-  //libera_oceano(pontosJA); libera_oceano(pontosJB); //TODO: Liberar memorias
+  libera_oceano(pontosJA); libera_oceano(pontosJB); //TODO: Liberar memorias
+  //t = clock() - t;
+  //printf("Tempo de execucao: %lf", ((double)t)/((CLOCKS_PER_SEC)));
   return 0;
 }
