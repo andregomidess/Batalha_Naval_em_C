@@ -16,7 +16,7 @@ typedef struct cel{
 
 int hash(int x, int y){
   if (x==0 && y==0) return 0;
-  if (x>y) return ((y%x)+(y%M)%19013)%M;
+  if (x>y) return ((y%x)+(y%x)%220057)%M;
   else return ((x%y))%M;
   
 }
